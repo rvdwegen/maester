@@ -18,7 +18,7 @@ This is the main Maester command that runs the tests and generates a report of t
 Invoke-Maester [[-Path] <String>] [-Tag <String[]>] [-ExcludeTag <String[]>] [-OutputHtmlFile <String>]
  [-OutputMarkdownFile <String>] [-OutputJsonFile <String>] [-OutputFolder <String>]
  [-OutputFolderFileName <String>] [-PesterConfiguration <PesterConfiguration>] [-Verbosity <String>]
- [-NonInteractive] [-PassThru] [-MailRecipient <String[]>] [-MailTestResultsUri <String>]
+ [-NonInteractive] [-SkipScopeCheck] [-PassThru] [-MailRecipient <String[]>] [-MailTestResultsUri <String>]
  [-MailUserId <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
@@ -302,6 +302,23 @@ Accept wildcard characters: False
 
 Run the tests in non-interactive mode.
 This will prevent the test results from being opened in the default browser.
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SkipScopeCheck
+
+Skips checking the current graph connection for required scopes.
+Can be used when your application has the reqiored access through different scopes.
 
 ```yaml
 Type: SwitchParameter
