@@ -2,17 +2,13 @@
 name: build-docs
 
 on:
-  # Runs on pushes targeting the default branch
-  push:
-    branches: ["main"]
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow updates to the repository
 permissions:
   contents: write
-  id-token: write
-  checks: write
+  pull-requests: write
 
 jobs:
   build:
@@ -23,16 +19,7 @@ jobs:
         run: ./build/Update-CommandReference.ps1
         shell: pwsh
 
-      - name: Update repo
-        run: |
-          if [[ `git status --porcelain` ]]; then
-            # Changes
-            echo "Updating command reference"
-            git config --global user.name 'Merill Fernando'
-            git config --global user.email 'merill@users.noreply.github.com'
-            git add -A && git commit -m "Bot: Updating command reference"
-            git push
-          else
-            # No changes
-            echo "No changes"
-          fi
+      - name: Create PR to update repo
+        uses: peter-evans/create-pull-request@v6
+        with:
+          title: Update maester.dev command reference
